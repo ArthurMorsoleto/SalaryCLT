@@ -87,9 +87,32 @@ public class SalaryViewModelTest {
     }
 
     @Test
+    public void calculateIrrf_FirstRangeNoDependents() {
+        double irrf = subject.calculateIRRF(700.0, 0);
+        assertEquals(0, irrf, DELTA);
+    }
+
+    @Test
+    public void calculateIrrf_SecondRangeNoDependents() {
+        double irrf = subject.calculateIRRF(2000.0, 0);
+        assertEquals(0, irrf, DELTA);
+    }
+
+    @Test
     public void calculateIrrf_ThirdRangeNoDependents() {
         double irrf = subject.calculateIRRF(3000.0, 0);
         assertEquals(61.08, irrf, DELTA);
     }
-    //TODO REST of ranges
+
+    @Test
+    public void calculateIrrf_ForthRangeNoDependents() {
+        double irrf = subject.calculateIRRF(4000.0, 0);
+        assertEquals(182.36, irrf, DELTA);
+    }
+
+    @Test
+    public void calculateIrrf_FifthRangeNoDependents() {
+        double irrf = subject.calculateIRRF(4700.0, 0);
+        assertEquals(305.06, irrf, DELTA);
+    }
 }
