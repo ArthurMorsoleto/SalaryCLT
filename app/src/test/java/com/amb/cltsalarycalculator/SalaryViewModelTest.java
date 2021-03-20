@@ -25,34 +25,35 @@ public class SalaryViewModelTest {
 
     @Test
     public void validateSalary_EmptyValue_SalaryValueError() {
-        subject.validateSalary("", "", "");
+        subject.validateAndCalculateLiquidSalary("", "", "");
         assertEquals(true, subject.getSalaryErrorLiveData().getValue());
     }
 
     @Test
     public void validateSalary_CompleteValue() {
-        SalaryVO result = subject.validateSalary("90,000.00", "", "");
+        subject.validateAndCalculateLiquidSalary("90,000.00", "", "");
+        LiquidSalaryVO result = subject.getLiquidSalaryLiveData().getValue();
 
         assertEquals(90000.0, result.rawSalary, DELTA);
-        assertEquals(0, result.dependents, DELTA);
         assertEquals(0.0, result.discounts, DELTA);
         Assert.assertNull(subject.getSalaryErrorLiveData().getValue());
     }
 
     @Test
     public void validateSalary_Dependents2() {
-        SalaryVO result = subject.validateSalary("9000.00", "2", "");
+        subject.validateAndCalculateLiquidSalary("9000.00", "2", "");
+        LiquidSalaryVO result = subject.getLiquidSalaryLiveData().getValue();
 
         assertEquals(9000.0, result.rawSalary, DELTA);
-        assertEquals(2, result.dependents, DELTA);
         assertEquals(0.0, result.discounts, DELTA);
     }
 
     @Test
     public void validateSalary_Discounts200() {
-        SalaryVO result = subject.validateSalary("9000.00", "2", "200.00");
+        subject.validateAndCalculateLiquidSalary("9000.00", "2", "200.00");
+        LiquidSalaryVO result = subject.getLiquidSalaryLiveData().getValue();
+
         assertEquals(9000.0, result.rawSalary, DELTA);
-        assertEquals(2, result.dependents, DELTA);
         assertEquals(200.0, result.discounts, DELTA);
     }
 

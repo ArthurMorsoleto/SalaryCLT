@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         inputDiscounts.addTextChangedListener(new CurrencyMask(inputDiscounts));
 
         calculateButton.setOnClickListener(v -> {
-            viewModel.validateSalary(
+            viewModel.validateAndCalculateLiquidSalary(
                     inputSalary.getText().toString(),
                     inputDependentsNumber.getText().toString(),
                     inputDiscounts.getText().toString()

@@ -44,12 +44,17 @@ import static com.amb.cltsalarycalculator.Constants.THIRD_RANGE_MIN_SALARY;
 public class SalaryViewModel extends ViewModel {
 
     private final MutableLiveData<Boolean> salaryErrorLiveData = new MutableLiveData<>();
+    private final MutableLiveData<LiquidSalaryVO> liquidSalaryLiveData = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getSalaryErrorLiveData() {
         return salaryErrorLiveData;
     }
 
-    public SalaryVO validateSalary(String rawSalary, String dependents, String discounts) {
+    public final MutableLiveData<LiquidSalaryVO> getLiquidSalaryLiveData() {
+        return liquidSalaryLiveData;
+    }
+
+    public void validateAndCalculateLiquidSalary(String rawSalary, String dependents, String discounts) {
         double salaryValue = 0.0;
         double discountsValue = 0.0;
         int dependentsNumber = 0;
@@ -68,10 +73,18 @@ public class SalaryViewModel extends ViewModel {
             discountsValue = getValue(discounts);
         }
 
-        SalaryVO salaryVO = new SalaryVO(salaryValue, dependentsNumber, discountsValue);
-        return salaryVO;
-    }
+        LiquidSalaryVO liquidSalaryVO = new LiquidSalaryVO();
+        liquidSalaryVO.rawSalary = salaryValue;
+        liquidSalaryVO.inss = calculateINSS(salaryValue);
+        liquidSalaryVO.irrf = calculateIRRF(salaryValue, dependentsNumber);
+        liquidSalaryVO.discounts = discountsValue;
+        liquidSalaryVO.liquidSalary = liquidSalaryVO.calculateLiquidSalary();
 
+        double totalDiscounts = liquidSalaryVO.discounts + liquidSalaryVO.irrf + liquidSalaryVO.inss;
+        liquidSalaryVO.discountsPercent = totalDiscounts * 100 / salaryValue;
+
+        liquidSalaryLiveData.postValue(liquidSalaryVO);
+    }
 
     private double getValue(String inputText) {
         String valueText = inputText.replace("$", "").replace(",", "");
@@ -109,7 +122,6 @@ public class SalaryViewModel extends ViewModel {
             throw new Exception("Invalid Salary");
         }
     }
-
 
     public double calculateIRRF(double rawSalary, int dependents) {
         double baseIRRF = rawSalary - calculateINSS(rawSalary) - dependents * DEPENDENTS_MULTIPLIER;
