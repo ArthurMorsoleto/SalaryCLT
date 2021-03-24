@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="48dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="48dp" />
+
+    <TextView
+        android:id="@+id/tvSalaryTitle"
+        style="@style/SalaryTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/salary_result_title"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/guideline">
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="start|top"
+            android:text="@string/label_raw_salary" />
+
+        <TextView
+            android:id="@+id/tvRawSalaryResult"
+            style="@style/ResultLabels"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="R$ 0,0" />
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/inss_label" />
+
+        <TextView
+            android:id="@+id/tvInssResult"
+            style="@style/ResultLabels"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="- R$ 0,0"
+            android:textColor="@color/red" />
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="start|top"
+            android:text="@string/irrf_label" />
+
+        <TextView
+            android:id="@+id/tvIrffResult"
+            style="@style/ResultLabels"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="- R$ 0,0"
+            android:textColor="@color/red" />
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:text="@string/label_other_discounts" />
+
+        <TextView
+            android:id="@+id/tvOtherDiscountsResult"
+            style="@style/ResultLabels"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="- R$ 0,0"
+            android:textColor="@color/red" />
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:text="Salário Líquido"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvLiquidSalaryResult"
+            style="@style/ResultLabels"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="- R$ 0,0"
+            android:textSize="20sp" />
+
+        <TextView
+            style="@style/ResultLabels"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:text="@string/discounts"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvPercentResult"
+            style="@style/ResultLabels"
+            android:layout_row="5"
+            android:layout_column="1"
+            android:layout_gravity="end|top"
+            android:text="- R$ 0,0"
+            android:textSize="20sp" />
+
+
+    </GridLayout>
+    
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

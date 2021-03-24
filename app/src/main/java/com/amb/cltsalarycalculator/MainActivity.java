@@ -1,6 +1,8 @@
 package com.amb.cltsalarycalculator;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String SALARY_RESULT = "SALARY_RESULT";
     private Button calculateButton;
     private EditText inputSalary;
     private EditText inputDependentsNumber;
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 inputSalary.requestFocus();
                 Toast.makeText(MainActivity.this, "Salário não pode estar vazio", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        viewModel.getLiquidSalaryLiveData().observe(this, value -> {
+            startActivity(new Intent(this, ResultActivity.class)
+                    .putExtra(SALARY_RESULT,  value)
+            );
         });
     }
 }

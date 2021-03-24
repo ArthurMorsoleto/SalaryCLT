@@ -1,6 +1,8 @@
 package com.amb.cltsalarycalculator;
 
-public class LiquidSalaryVO {
+import java.io.Serializable;
+
+public class LiquidSalaryVO implements Serializable {
     Double rawSalary;
     Double liquidSalary;
     Double inss;

@@ -81,7 +81,7 @@ public class SalaryViewModel extends ViewModel {
         liquidSalaryVO.liquidSalary = liquidSalaryVO.calculateLiquidSalary();
 
         double totalDiscounts = liquidSalaryVO.discounts + liquidSalaryVO.irrf + liquidSalaryVO.inss;
-        liquidSalaryVO.discountsPercent = totalDiscounts * 100 / salaryValue;
+        liquidSalaryVO.discountsPercent = totalDiscounts * ONE_HUNDRED_PERCENT / salaryValue;
 
         liquidSalaryLiveData.postValue(liquidSalaryVO);
     }

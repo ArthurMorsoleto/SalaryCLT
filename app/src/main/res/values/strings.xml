@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">CLT Salary Calculator</string>
     <string name="salary_calculator_title">Calculadora de Salário Líquido</string>
+    <string name="salary_result_title">Resultado</string>
     <string name="label_other_discounts">Outros Descontos (R$)</string>
     <string name="label_dependencies_number">Número Dependentes</string>
     <string name="label_raw_salary">Salário Bruto (R$)</string>
     <string name="bt_calculate">Calcular</string>
+    <string name="inss_label">INSS</string>
+    <string name="irrf_label">IRRF</string>
+    <string name="discounts">Descontos</string>
+    <string name="discountsPercent">%1$s %</string>
 </resources>
